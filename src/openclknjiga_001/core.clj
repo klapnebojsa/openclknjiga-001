@@ -23,15 +23,13 @@
       ]
   (try
     (with-release [num-platforms (num-platforms)
-                   ;platform (*platform*)
                    platformsone (first (platforms))
                    versionone (version (first (platforms)))
                    icd-suffix-khrone (icd-suffix-khr (first (platforms)))
                    extensionsone (extensions (first (platforms)))
                    name-infoone (name-info (first (platforms)))
                    profileone (profile (first (platforms)))
-                   vendorone (vendor (first (platforms)))
-                   ;platformone-info (platform-info)               
+                   vendorone (vendor (first (platforms)))          
                    
                    platformstwo (second (platforms))
                    versiontwo (version (second (platforms)))
@@ -40,7 +38,7 @@
                    name-infotwo (name-info (second (platforms)))
                    profiletwo (profile (second (platforms)))
                    vendortwo (vendor (second (platforms)))                   
-                   ;platformtwo-info (platform-info [1])
+
                    
                    
                    
