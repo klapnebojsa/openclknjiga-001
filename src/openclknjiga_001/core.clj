@@ -26,9 +26,19 @@
                    ;platform (*platform*)
                    platformsone (first (platforms))
                    versionone (version (first (platforms)))
-                   ;platformone-info (platform-info)
+                   icd-suffix-khrone (icd-suffix-khr (first (platforms)))
+                   extensionsone (extensions (first (platforms)))
+                   name-infoone (name-info (first (platforms)))
+                   profileone (profile (first (platforms)))
+                   vendorone (vendor (first (platforms)))
+                   ;platformone-info (platform-info)               
+                   
                    platformstwo (second (platforms))
-                   versiontwo (version (second (platforms)))                   
+                   versiontwo (version (second (platforms)))
+                   icd-suffix-khrtwo (icd-suffix-khr (second (platforms))) 
+                   name-infotwo (name-info (second (platforms)))
+                   profiletwo (profile (second (platforms)))
+                   vendortwo (vendor (second (platforms)))                   
                    ;platformtwo-info (platform-info [1])
                    
                    
@@ -47,15 +57,33 @@
                    ;read-complete (event)
                    ]
 
-      (println "num-platforms: " num-platforms)
-      ;(println "platform1: " platform)      
-      
+      (println "PLATFORME ----------------------------------------------------------")
+      (println "num-platforms: " num-platforms) 
+      (println "PLATFORMA 111111111111----------------------------------------------")      
       (println "platformsone: " platformsone)
       (println "versionone: " versionone)
-      ;(println "platformone-info1: " platformone-info)      
+      (println "icd-suffix-khrone: " icd-suffix-khrone)      
+      (println "extensionsone: " extensionsone)
+      (println "name-infoone: " name-infoone)      
+      (println "profileone: " profileone)      
+      (println "vendorone: " vendorone)
+      
+      (println "PLATFORMA 222222222222----------------------------------------------")         
       (println "platformstwo: " platformstwo) 
-      (println "versiontwo: " versiontwo)      
-      ;(println "platformtwo-info1: " platformtwo-info)
+      (println "versiontwo: " versiontwo) 
+      (println "icd-suffix-khrtwo: " icd-suffix-khrtwo)
+      (println "extensionstwo: " extensionsone)
+      (println "name-infotwo: " name-infotwo)      
+      (println "profiletwo: " profiletwo)      
+      (println "vendortwo: " vendortwo)
+      (println "DOVDE ----------------------------------------------------- PLATFORME")
+
+
+
+
+
+
+
       
       (println "dev1: " dev)
       (println "ctx1: " ctx)
