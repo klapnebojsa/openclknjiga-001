@@ -36,6 +36,7 @@
                    platformstwo (second (platforms))
                    versiontwo (version (second (platforms)))
                    icd-suffix-khrtwo (icd-suffix-khr (second (platforms))) 
+                   extensionstwo (extensions (second (platforms)))                   
                    name-infotwo (name-info (second (platforms)))
                    profiletwo (profile (second (platforms)))
                    vendortwo (vendor (second (platforms)))                   
@@ -45,14 +46,14 @@
                    
                    
                    
-                   devs (devices (first (platforms)))
-                   dev (first devs)
-                   ;dev (first (devices (first (platforms))))
-                   ctx (context [dev])
-                   cqueue (command-queue-1 ctx dev)
-                   cl-msg (cl-buffer ctx 16 :write-only)
-                   prog (build-program! (program-with-source ctx [program-source]))
-                   hello-kernel (kernel prog "hello_kernel")
+                   ;devs (devices (first (platforms)))
+                   ;dev (first devs)
+                   ;;dev (first (devices (first (platforms))))
+                   ;ctx (context [dev])
+                   ;cqueue (command-queue-1 ctx dev)
+                   ;cl-msg (cl-buffer ctx 16 :write-only)
+                   ;prog (build-program! (program-with-source ctx [program-source]))
+                   ;hello-kernel (kernel prog "hello_kernel")
 
                    ;read-complete (event)
                    ]
@@ -72,7 +73,7 @@
       (println "platformstwo: " platformstwo) 
       (println "versiontwo: " versiontwo) 
       (println "icd-suffix-khrtwo: " icd-suffix-khrtwo)
-      (println "extensionstwo: " extensionsone)
+      (println "extensionstwo: " extensionstwo)
       (println "name-infotwo: " name-infotwo)      
       (println "profiletwo: " profiletwo)      
       (println "vendortwo: " vendortwo)
@@ -85,11 +86,11 @@
 
 
       
-      (println "dev1: " dev)
-      (println "ctx1: " ctx)
-      (println "cqueue1: " cqueue) 
-      (println "prog1: " prog)
-      (println "hello-kernel1: " hello-kernel)
+      ;(println "dev1: " dev)
+      ;(println "ctx1: " ctx)
+      ;(println "cqueue1: " cqueue) 
+      ;(println "prog1: " prog)
+      ;(println "hello-kernel1: " hello-kernel)
       
       ;(println "dev1: " info dev)
       ;(println "ctx1: " info ctx)
@@ -105,6 +106,8 @@
       ;(enq-read! cqueue cl-msg host-msg)
       ;(apply str (map char
       ;               (wrap-byte-seq int8 (byte-seq host-msg))))
+      (release (platforms))      
+      
       )
     (catch Exception e (println "Greska 11111111: " (.getMessage e)))
   )
