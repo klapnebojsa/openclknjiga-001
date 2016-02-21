@@ -23,6 +23,7 @@
       ]
   (try     ;"PLATFORME ----------------------------------------------------------" 
     (with-release [num-platforms (num-platforms)
+                   ;"-----Platforma 1"
                    platformsone (first (platforms))
                    versionone (version platformsone)
                    icd-suffix-khrone (icd-suffix-khr platformsone)
@@ -30,7 +31,7 @@
                    name-infoone (name-info platformsone)
                    profileone (profile platformsone)
                    vendorone (vendor platformsone)          
-                             
+                  ;"-----Platforma 2"         
                    platformstwo (second (platforms))
                    versiontwo (version platformstwo)
                    icd-suffix-khrtwo (icd-suffix-khr platformstwo) 
@@ -40,6 +41,7 @@
                    vendortwo (vendor platformstwo)                   
 
             ;"DEVICES------------------------------------------------------------"
+                   ;"--------Devices u platformi 1"
                    devsone (first (devices platformsone))
                    devsonegpu (first (devices platformsone :gpu))  ;mora first zato sto je bez njega vrednost devsonegpu u obliku vektora
                                                                    ;a komanda name-info ne moze da cita vektor vec samo clan vektora (ovde je to prvi i jedini)
@@ -49,10 +51,10 @@
                    name-infodevonegpu (name-info devsonegpu)
                    opencl-c-ver-devonegpu (opencl-c-version devsonegpu)  ;sva moguca polja na https://crossclj.info/ns/uncomplicate/clojurecl/0.3.0/uncomplicate.clojurecl.info.html#_info~cl_device_id~Info
                    id-infodevonegpu (extensions devsonegpu)    ; ...      u sekciji info                   
-                   
                    name-infodevonecpu (name-info devsonecpu)
                    ;name-infodevoneacc (name-info devsoneacc)    ;puca/ne radi za nil
                    
+                   ;"--------Devices u platformi 2"                   
                    devstwo (first (devices platformstwo))
                    devstwogpu (first (devices platformstwo :gpu))
                    devstwocpu (first (devices platformstwo :cpu))
@@ -60,7 +62,10 @@
                    devicestwo* (devices* platformstwo 8)                   
                    name-infodevtwogpu (name-info devstwogpu)
                    
-                   
+            ;"CONTEXTS------------------------------------------------------------"  
+            
+            
+            
                    
                    ;devs (devices (first (platforms)))
                              ;dev (first devs)
@@ -97,8 +102,8 @@
       (println "DOVDE ----------------------------------------------------- PLATFORME")
       (println "") 
       (println "")
-      (println "------------------------------------------------------------DEVICES")
-      ;(println "devsall: " devsall)      
+      
+      (println "------------------------------------------------------------DEVICES")  
       (println "---------------DEVICE U PLATFORM 1111111111111111 ------------------")
       (println "devsone: " devsone)
       (println "devsonegpu: " devsonegpu)
