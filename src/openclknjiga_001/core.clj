@@ -42,7 +42,9 @@
 
             ;"DEVICES------------------------------------------------------------"
                    ;"--------Devices u platformi 1"
-                   devsone (first (devices platformsone))
+                   devsone (devices platformsone)    ;problem zato sto je izlaz vektor
+                   devsone1 (first (devices platformsone))
+                   devsone2 (second (devices platformsone))                   
                    devsonegpu (first (devices platformsone :gpu))  ;mora first zato sto je bez njega vrednost devsonegpu u obliku vektora
                                                                    ;a komanda name-info ne moze da cita vektor vec samo clan vektora (ovde je to prvi i jedini)
                    devsonecpu (first (devices platformsone :cpu))
@@ -63,9 +65,28 @@
                    name-infodevtwogpu (name-info devstwogpu)
                    
             ;"CONTEXTS------------------------------------------------------------"  
-            
-            
-            
+                  ;"---Context 1"               
+                   ctxone (context (devices (first (platforms))))   ;devsone-izlaz je vektor pa zato ponavaljamo celu komandu a ne uzimamo promenjivu
+                   infoctxone (info ctxone)
+                   reference-countone (reference-count ctxone)
+                   propertiesone (properties ctxone)
+                  ;"--------Devices u context 1"            
+                   devices-in-context (devices-in-context ctxone) 
+                   num-devices-in-context (num-devices-in-context ctxone)
+                   devctxone1 (first devices-in-context)
+                   devctxone2 (second devices-in-context)
+                   name-infodevone1 (name-info devctxone1)
+                   name-infodevone2 (name-info devctxone2)                   
+                  ;"---Context 2"               
+                   ;ctxtwo (context (devices (second (platforms))))
+                   ;infoctxtwo (info ctxtwo)
+                  ;"--------Devices u context 2"                     
+                  
+                  
+                  
+                  
+                  
+                  
                    
                    ;devs (devices (first (platforms)))
                              ;dev (first devs)
@@ -106,6 +127,8 @@
       (println "------------------------------------------------------------DEVICES")  
       (println "---------------DEVICE U PLATFORM 1111111111111111 ------------------")
       (println "devsone: " devsone)
+      (println "devsone1: " devsone1)
+      (println "devsone2: " devsone2)      
       (println "devsonegpu: " devsonegpu)
       (println "devsonecpu: " devsonecpu)
       (println "devsoneacc: " devsoneacc)
@@ -129,8 +152,24 @@
       (println "name-infodevtwogpu: " name-infodevtwogpu)      
       (println "DOVDE ----------------------------------------------------- DEVICES")
 
-
-
+      (println "")
+      (println "------------------------------------------------------------CONTEXT") 
+      (println "ctxone: " ctxone)
+      (println "infoctxone: " infoctxone)
+      (println "reference-countone: " reference-countone)
+      (println "propertiesone: " propertiesone)       
+      (println "---------------DEVICE U CONTEXT 1111111111111111 ------------------")
+      (println "devices-in-context: " devices-in-context)
+      (println "num-devices-in-context: " num-devices-in-context)      
+      (println "devctxone1: " devctxone1)
+      (println "devctxone2: " devctxone2)      
+      (println "name-infodevone1: " name-infodevone1) 
+      (println "name-infodevone2: " name-infodevone2) 
+      
+      (println "---------------DEVICE U CONTEXT 2222222222222222 ------------------")
+      ;(println "ctxtwo: " ctxtwo)
+      ;(println "infoctxtwo: " infoctxtwo)     
+      (println "DOVDE ----------------------------------------------------- CONTEXT")
 
       
       ;(println "dev1: " dev)
@@ -153,9 +192,11 @@
       ;(enq-read! cqueue cl-msg host-msg)
       ;(apply str (map char
       ;               (wrap-byte-seq int8 (byte-seq host-msg))))
-      (release (platforms))      
-      (release-seq (platforms)) 
-      (Releaseable (platforms))      
+      (release platforms)
+      (release devices)
+      (release context)      
+      ;(release-seq (platforms)) 
+      ;(Releaseable (platforms))      
       
       )
     (catch Exception e (println "Greska 11111111: " (.getMessage e)))
