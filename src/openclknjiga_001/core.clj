@@ -98,11 +98,20 @@
                   ;"--------Devices u context 2"                     
                   
              ;"PROGRAM--------------------------------------------------------------"             
-                   cqueue (command-queue-1 ctxone devsone1)
-                   cl-msg (cl-buffer ctxone 16 :write-only)                   
-                   prog (build-program! (program-with-source ctxone [program-source]))   
-                   hello-kernel (kernel prog "hello_kernel")
-                   read-complete (event)
+                   ;cqueue (command-queue-1 ctxone devsone1)
+                   ;cl-msg (cl-buffer ctxone 16 :write-only)                   
+                   prog (build-program! (program-with-source ctxone [program-source]))
+                   infoprog (info prog)
+                   infoprog1 (program-context prog)                   
+                   infoprog2 (program-num-devices prog)                   
+                   infoprog3 (reference-count prog)                   
+                   infoprog4 (program-devices prog)                                    
+                   infoprog6 (binary-sizes prog)
+                   infoprog7 (binaries prog)                   
+                   infoprog8 (program-num-kernels prog)                   
+                   infoprog9 (kernel-names prog)                   
+                   ;hello-kernel (kernel prog "hello_kernel")
+                   ;read-complete (event)
 
                    
                    ;devs (devices (first (platforms)))
@@ -187,6 +196,20 @@
         ;(println "infoctxtwo: " infoctxtwo)     
         (println "DOVDE ----------------------------------------------------- CONTEXT")
 
+        
+        (println "----------------------------------------------------------- PROGRAM")
+        (println "infoprog: " infoprog)
+        (println "infoprog1: " infoprog1) 
+        (println "infoprog2: " infoprog2)
+        (println "infoprog3: " infoprog3) 
+        (println "infoprog4: " infoprog4) 
+        (println "infoprog6: " infoprog6)
+        (println "infoprog7: " infoprog7) 
+        (println "infoprog8: " infoprog8)
+        (println "infoprog9: " infoprog9)
+        (println "DOVDE ----------------------------------------------------- PROGRAM")
+
+        
         ;(println pr-sor)
         
         ;(println "dev1: " dev)
