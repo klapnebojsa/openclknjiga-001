@@ -20,7 +20,8 @@
         program-source 
         "__kernel void hello_kernel(__global char16 *msg) {\n    *msg = (char16)('H', 'e', 'l', 'l', 'o', ' ',
    'k', 'e', 'r', 'n', 'e', 'l', '!', '!', '!', '\\0');\n}\n"
-        pr-sor (slurp (io/reader "examples/exam001"))
+        ;pr-sor (slurp (io/reader "examples/double-test.cl"))
+        pr-sor (slurp (io/reader "examples/exam002.clj"))
       ]
     
  
@@ -99,10 +100,10 @@
              ;"PROGRAM--------------------------------------------------------------"             
                    cqueue (command-queue-1 ctxone devsone1)
                    cl-msg (cl-buffer ctxone 16 :write-only)                   
-                   prog (build-program! (program-with-source ctxone [pr-sor]))   
-                   hello-kernel (kernel prog "exam001.core")
+                   prog (build-program! (program-with-source ctxone [program-source]))   
+                   hello-kernel (kernel prog "hello_kernel")
                    read-complete (event)
-                  
+
                    
                    ;devs (devices (first (platforms)))
                              ;dev (first devs)
@@ -115,7 +116,6 @@
 
                      ;read-complete (event)
                      ]
-
         (println "----------------------------------------------------------PLATFORME ")
         (println "num-platforms: " num-platforms) 
         (println "---------------PLATFORMA 111111111111-------------------------------")      
@@ -187,6 +187,7 @@
         ;(println "infoctxtwo: " infoctxtwo)     
         (println "DOVDE ----------------------------------------------------- CONTEXT")
 
+        ;(println pr-sor)
         
         ;(println "dev1: " dev)
         ;(println "ctx1: " ctx)
