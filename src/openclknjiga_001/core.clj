@@ -97,9 +97,7 @@
                    ;infoctxtwo (info ctxtwo)
                   ;"--------Devices u context 2"                     
                   
-             ;"PROGRAM--------------------------------------------------------------"             
-                   ;cqueue (command-queue-1 ctxone devsone1)
-                   ;cl-msg (cl-buffer ctxone 16 :write-only)                   
+           ;"PROGRAM--------------------------------------------------------------"                             
                    prog (build-program! (program-with-source ctxone [program-source]))
                    infoprog (info prog)
                    program-context (program-context prog)                   
@@ -110,9 +108,30 @@
                    binaries (binaries prog)                   
                    program-num-kernels (program-num-kernels prog)                   
                    kernel-names (kernel-names prog)                   
-                   ;hello-kernel (kernel prog "hello_kernel")
-                   ;read-complete (event)
 
+             ;"KERNEL--------------------------------------------------------------"     
+                   hello-kernel (kernel prog "hello_kernel")
+                   function-name (function-name hello-kernel)
+                   num-args (num-args hello-kernel)                   
+                   kernel-context (kernel-context hello-kernel)
+                   kernel-program (kernel-program hello-kernel)                    
+                   attributes (attributes hello-kernel)                   
+                   
+             ;"command queue--------------------------------------------------------------" 
+                   cqueue (command-queue-1 ctx dev)
+
+
+
+                   ;read-complete (event)             
+             
+             
+             
+             
+             
+             
+             
+             
+             
                    
                    ;devs (devices (first (platforms)))
                              ;dev (first devs)
@@ -209,6 +228,19 @@
         (println "kernel-names: " kernel-names)
         (println "DOVDE ----------------------------------------------------- PROGRAM")
 
+        (println "----------------------------------------------------------- KERNEL")
+        (println "hello-kernel: " hello-kernel)
+        (println "function-name: " function-name)
+        (println "num-args: " num-args)        
+        (println "kernel-context: " kernel-context)        
+        (println "kernel-program: " kernel-program)        
+        (println "attributes: " attributes)        
+        (println "DOVDE ----------------------------------------------------- KERNEL")        
+        
+        
+        
+        
+        
         
         ;(println pr-sor)
         
@@ -236,6 +268,8 @@
         (release devices)
         (release ctxone)
         (release prog)
+        (release hello-kernel)
+
         
         ;(release-seq (platforms)) 
         ;(Releaseable (platforms))      
