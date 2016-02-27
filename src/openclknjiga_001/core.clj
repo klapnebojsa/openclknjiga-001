@@ -41,8 +41,8 @@
                    icd-suffix-khrtwo (icd-suffix-khr platformstwo) 
                    extensionstwo (extensions platformstwo)                   
                    name-infotwo (name-info platformstwo)
-                     profiletwo (profile platformstwo)
-                     vendortwo (vendor platformstwo)                   
+                   profiletwo (profile platformstwo)
+                   vendortwo (vendor platformstwo)                   
 
             ;"DEVICES------------------------------------------------------------"
                    ;"--------Devices u platformi 1"
@@ -63,8 +63,8 @@
                    ;"--------Devices u platformi 2"                   
                    devstwo (first (devices platformstwo))
                    devstwogpu (first (devices platformstwo :gpu))
-                     devstwocpu (first (devices platformstwo :cpu))
-                     devstwoacc (first (devices platformstwo :accelerator))                   
+                   devstwocpu (first (devices platformstwo :cpu))
+                   devstwoacc (first (devices platformstwo :accelerator))                   
                    devicestwo* (devices* platformstwo 8)                   
                    name-infodevtwogpu (name-info devstwogpu)
                    
@@ -117,11 +117,34 @@
                    kernel-program (kernel-program hello-kernel)                    
                    attributes (attributes hello-kernel)                   
                    
-             ;"command queue--------------------------------------------------------------" 
-                   cqueue (command-queue-1 ctx dev)
+             ;"COMMAND QUEUE-------------------------------------------------------" 
+                   cqueue (command-queue-1 ctxone devsone1)
 
 
+             ;"BUFFER OBJECT-------------------------------------------------------"                    
+                   cl-buffer (cl-buffer ctxone 32 :write-only)
+                   typebuff (type cl-buffer)
+                   sizebuff (size cl-buffer)
 
+                   cl-sub-buffer (cl-sub-buffer cl-buffer 8 16 :write-only)
+                   typesbuff (type cl-sub-buffer)
+                   sizesbuff (size cl-sub-buffer)
+                         
+             ;"SETOVANJE ARGUMENTA-------------------------------------------------"                    
+                   set-arg (set-arg! hello-kernel 0 cl-buffer)       ;clSetKernelArg                                      
+                   event (event)
+                   enq-read! (enq-read! cqueue cl-buffer host-msg event) ;To read a buffer object from a device to the host, the simplest function to use is enq-read!                
+                   enq-write! (enq-write! cqueue cl-buffer host-msg event)                                                      
+                   
+                   ;enq-copy* (enq-copy* cqueue cl-buffer host-msg  event)   ;With these functions, you can copy data between two memory objects on a device, or between memory objects on different devices
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
                    ;read-complete (event)             
              
              
@@ -144,6 +167,8 @@
 
                      ;read-complete (event)
                      ]
+        ;(enq-read! cqueue cl-msg host-msg read-complete) => cqueue      
+      
         (println "----------------------------------------------------------PLATFORME ")
         (println "num-platforms: " num-platforms) 
         (println "---------------PLATFORMA 111111111111-------------------------------")      
@@ -210,12 +235,13 @@
         (println "name-infodevone1: " name-infodevone1) 
         ;(println "name-infodevone2: " name-infodevone2) 
         
+        (println "")        
         (println "---------------DEVICE U CONTEXT 2222222222222222 ------------------")
         ;(println "ctxtwo: " ctxtwo)
         ;(println "infoctxtwo: " infoctxtwo)     
         (println "DOVDE ----------------------------------------------------- CONTEXT")
 
-        
+        (println "")        
         (println "----------------------------------------------------------- PROGRAM")
         (println "infoprog: " infoprog)
         (println "program-context: " program-context) 
@@ -228,6 +254,7 @@
         (println "kernel-names: " kernel-names)
         (println "DOVDE ----------------------------------------------------- PROGRAM")
 
+        (println "")        
         (println "----------------------------------------------------------- KERNEL")
         (println "hello-kernel: " hello-kernel)
         (println "function-name: " function-name)
@@ -236,10 +263,29 @@
         (println "kernel-program: " kernel-program)        
         (println "attributes: " attributes)        
         (println "DOVDE ----------------------------------------------------- KERNEL")        
+
+        (println "")        
+        (println "----------------------------------------------------- COMMAND QUEUE")
+        (println "cqueue: " cqueue)
+        (println "DOVDE ----------------------------------------------- COMMAND QUEUE")        
+
+        (println "")        
+        (println "----------------------------------------------------- BUFFER OBJECT")
+        (println "cl-buffer: " cl-buffer)      
+        (println "typebuff: " typebuff)
+        (println "sizebuff: " sizebuff)        
         
+        (println "cl-sub-buffer: " cl-sub-buffer)
+        (println "typesbuff: " typesbuff)
+        (println "sizesbuff: " sizesbuff)        
+        (println "DOVDE ----------------------------------------------- BUFFER OBJECT")  
         
-        
-        
+        (println "---------------------------------------------- SETOVANJE ARGUMENATA")
+        (println "set-arg: " set-arg)
+        (println "enq-read!: " enq-read!)        
+        (println "enq-write!: " enq-write!)
+         
+        (println "DOVDE ---------------------------------------- SETOVANJE ARGUMENATA")    
         
         
         ;(println pr-sor)
@@ -264,12 +310,12 @@
         ;(enq-read! cqueue cl-msg host-msg)
         ;(apply str (map char
         ;               (wrap-byte-seq int8 (byte-seq host-msg))))
-        (release platforms)
+        (enq-unmap! platforms)
         (release devices)
-        (release ctxone)
+        (release ctxone)      
         (release prog)
         (release hello-kernel)
-
+        (release cqueue)
         
         ;(release-seq (platforms)) 
         ;(Releaseable (platforms))      
