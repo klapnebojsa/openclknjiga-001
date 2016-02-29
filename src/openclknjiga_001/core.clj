@@ -110,7 +110,7 @@
                    kernel-names (kernel-names prog)                   
 
              ;"KERNEL--------------------------------------------------------------"     
-                   hello-kernel (kernel prog "hello_kernel")
+                   hello-kernel (kernel prog "hello_kernel")             
                    function-name (function-name hello-kernel)
                    num-args (num-args hello-kernel)                   
                    kernel-context (kernel-context hello-kernel)
@@ -138,34 +138,25 @@
                    
                    ;enq-copy* (enq-copy* cqueue cl-buffer host-msg  event)   ;With these functions, you can copy data between two memory objects on a device, or between memory objects on different devices
                    
+             ;ASINHRONO IZVRSENJE KERNELA U DEVICE-U
+                   enq-nd! (enq-nd! cqueue hello-kernel (work-size [8]))
+                   ;enq-nw! (enq-nd! [cqueue hello-kernel (work-size [8]) event])
+                   ;                 (with-check (+ 5 3) (println "UUUUUUUUUU")))                   
                    
                    
+
                    
-                   
-                   
-                   
-                   
-                   ;read-complete (event)             
-             
-             
-             
-             
-             
-             
-             
-             
-             
                    
                    ;devs (devices (first (platforms)))
-                             ;dev (first devs)
-                             ;;dev (first (devices (first (platforms))))
-                             ;ctx (context [dev])
-                             ;cqueue (command-queue-1 ctx dev)
-                             ;cl-msg (cl-buffer ctx 16 :write-only)
-                             ;prog (build-program! (program-with-source ctx [program-source]))
-                             ;hello-kernel (kernel prog "hello_kernel")
+                   ;dev (first devs)
+                   ;;dev (first (devices (first (platforms))))
+                   ;ctx (context [dev])
+                   ;cqueue (command-queue-1 ctx dev)
+                   ;cl-msg (cl-buffer ctx 16 :write-only)
+                   ;prog (build-program! (program-with-source ctx [program-source]))
+                   ;hello-kernel (kernel prog "hello_kernel")
 
-                     ;read-complete (event)
+                    ;read-complete (event)
                      ]
         ;(enq-read! cqueue cl-msg host-msg read-complete) => cqueue      
       
@@ -286,8 +277,13 @@
         (println "enq-write!: " enq-write!)
          
         (println "DOVDE ---------------------------------------- SETOVANJE ARGUMENATA")    
-        
-        
+
+
+        (println "---------------------------- ASINHRONO IZBRSENJE KERNELA U DEVICE-U")
+        (println "enq-nd!: " enq-nd!)
+        (println "DOVDE ---------------------- ASINHRONO IZBRSENJE KERNELA U DEVICE-U")         
+             ;
+                           
         ;(println pr-sor)
         
         ;(println "dev1: " dev)
@@ -310,6 +306,9 @@
         ;(enq-read! cqueue cl-msg host-msg)
         ;(apply str (map char
         ;               (wrap-byte-seq int8 (byte-seq host-msg))))
+        
+        
+        
         (enq-unmap! platforms)
         (release devices)
         (release ctxone)      
@@ -325,3 +324,7 @@
   )
   )
 )
+
+
+
+
